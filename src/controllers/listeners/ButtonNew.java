@@ -26,24 +26,21 @@ public class ButtonNew implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        ButtonSend.guessedLettersSet.clear();
-        model.setImageId(0);
-        view.hideNewButtons();
-        view.getRealDateTime().stop();
-        if (!view.getGameTime().isRunning()) {
-            view.getGameTime().setSeconds(0);
-            view.getGameTime().setMinutes(0);
-            view.getGameTime().setRunning(true);
-            view.getGameTime().startTimer();
-        } else {
-            view.getGameTime().stopTimer();
-            view.getGameTime().setRunning(false);
-        }
-        view.getTxtChar().requestFocus();
-        view.setNewImage(0);
+        view.hideNewButtons(); // Seadistab nupud ja tekstiväljad uue mängu jaoks
+        model.setImageId(0);  // Seadistab pildi ID algväärtusele
+        ButtonSend.guessedLettersSet.clear();  // Tühjendab arvatud tähtede nimekirja
+        view.getRealDateTime().stop(); // Peatab reaalse aja taimeri
+
+        // Peatab mängu aja taimeri ja lähtestab aja väärtused
+        view.getGameTime().stopTimer();
+        view.getGameTime().setSeconds(0);
+        view.getGameTime().setMinutes(0);
+        view.getGameTime().startTimer(); // Alustab mängu aja taimerit
+        view.getTxtChar().requestFocus(); // Tegevusliini fookus pärast uue mängu nupu vajutamist
+        view.setNewImage(0); // Seadistab uue pildi
         String selectedCategory = view.getCmbCategory().getSelectedItem().toString();
-        model.generatedWordFromCategoriesList(selectedCategory);
+        model.generatedWordFromCategoriesList(selectedCategory); // Genereerib uue sõna valitud kategooria põhjal
         String wordOfNew = model.spaceBetweenWords(String.valueOf(model.getNewWord()));
-        view.getLblResult().setText(wordOfNew);
+        view.getLblResult().setText(wordOfNew); // Uuendab kasutajaliidest uue genereeritud sõnaga
     }
 }

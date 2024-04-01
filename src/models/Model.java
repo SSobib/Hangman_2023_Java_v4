@@ -242,9 +242,17 @@ public class Model {
         return joiner.toString();
     }
     public void askPlayerName() {
-        playerName = JOptionPane.showInputDialog("Enter your name:");
-        if (playerName == null || playerName.length() < 2) {
-            askPlayerName();
+        // Set the custom title for the input dialog
+        String title = "Enter the name for leaderboard";
+        playerName = JOptionPane.showInputDialog(null, "Enter your name:", title, JOptionPane.PLAIN_MESSAGE);
+        if (playerName == null) {
+            // Handle cancellation
+            playerName = "***NIMETU***"; // Set a default name for cancellation
+        } else if (playerName.length() < 2) {
+            // Prompt the user to enter a longer name
+            JOptionPane.showMessageDialog(null, "Name must be at least 2 characters.", "Invalid Name", JOptionPane.ERROR_MESSAGE);
+            askPlayerName(); // Re-prompt for name
+            return;
         }
     }
     public void setImageId(int imageId) {

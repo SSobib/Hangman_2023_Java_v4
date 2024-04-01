@@ -72,7 +72,9 @@ public class ButtonSend implements ActionListener {
             }
         }
         model.setCountMissedWords(model.getMissedLetters().size());
-        view.getLblError().setText("Wrong: " + model.getCountMissedWords() + " letter(s) " + model.getMissedLetters());
+        String wrongLetters = String.join(", ", model.getMissedLetters());
+        view.getLblError().setText("<html>Wrong: " + model.getCountMissedWords() + " letter(s) <font color='red'>" + wrongLetters + "</font></html>");
+
         view.getTxtChar().setText("");
         if (!model.getNewWord().toString().contains("_")) {
             view.getGameTime().stopTimer();

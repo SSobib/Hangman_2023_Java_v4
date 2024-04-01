@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 public class ButtonCancel implements ActionListener {
     private final Model model;
     private final View view;
+
     public ButtonCancel(Model model, View view) {
         this.model = model;
         this.view = view;
@@ -17,19 +18,29 @@ public class ButtonCancel implements ActionListener {
 
     /**
      * The method that is executed when the cancel game button is clicked
+     *
      * @param e the event to be processed
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        // Clear guessed letters set
         ButtonSend.guessedLettersSet.clear();
+
+        // Reset image id
         model.setImageId(0);
 
-        view.showNewButton(); // Set access to buttons and text field
+        // Set access to buttons and text field
+        view.showNewButton();
 
-        view.getGameTime().stopTimer(); // Stop gameTime
-        view.getGameTime().setRunning(false); // set game not running
+        // Stop game time
+        view.getGameTime().stopTimer();
+        view.getGameTime().setRunning(false);
 
-        view.getRealDateTime().start(); // Start real time again
+        // Start real time again
+        view.getRealDateTime().start();
+
+        // Reset result label
         view.getLblResult().setText("L E T ' S  P L A Y");
     }
 }
